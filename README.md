@@ -54,7 +54,8 @@ for a scoring function, as follows:
 
 The `params` object holds the following information:
 * A `query`, the query string to compare against the field value (mandatory);
-* A `field` name, the name of the field to retrieve the other values to be compared against (mandatory);
+* A `field` name, the name of the field to retrieve the other values to be compared against (mandatory). This field must have been indexed with term vectors enabled, including token positions. This can be done by adding the `"term_vector":
+  "with_positions"` parameter to the field declaration in the index.
 * An `analyzer`, the identifier of an ElasticSearch analyzer to use to tokenize the query (optional). If not provided, the default search analyzer will be used;
 * Other optional parameters which depend on the similarity heuristic used (in this case `query_norm_exponent`).
 
