@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.opencorporates</groupId>
 	<artifactId>elasticsearch-record-linkage</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 	<description>elasticsearch recordLinkage plugin</description>
 	<inceptionYear>2019</inceptionYear>
