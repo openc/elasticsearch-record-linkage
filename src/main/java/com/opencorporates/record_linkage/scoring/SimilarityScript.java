@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import org.apache.lucene.index.Fields;
 import org.apache.lucene.index.LeafReader;
-import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.PostingsEnum;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.index.Terms;
@@ -47,7 +46,7 @@ public class SimilarityScript {
 	/**
 	 * Creates a similarity script.
 	 * 
-	 * @param context
+	 * @param reader
 	 * 		provides access to the search index to retrieve the frequencies
 	 * @param field
 	 *      name of the field to compute the string similarity against
@@ -63,9 +62,9 @@ public class SimilarityScript {
 	 * @param similarity
 	 *      the similarity to use to compare query and field.
 	 */
-	public SimilarityScript(LeafReaderContext context, String field, String query,
+	public SimilarityScript(LeafReader reader, String field, String query,
 			List<String> queryTokens, int positionIncrementGap, int totalDocs, StringSimilarity similarity) {
-		reader = context.reader();
+		this.reader = reader;
 		this.field = field;
 		this.positionIncrementGap = positionIncrementGap;
 		this.query = query;
@@ -108,7 +107,7 @@ public class SimilarityScript {
     /**
      * Retrieves the values of the target field. Each value is represented as a list of tokens.
      */
-    private List<List<String>> getFieldValues() {
+    protected List<List<String>> getFieldValues() {
     	try {
     		Fields fields = reader.getTermVectors(currentDocId);
     		

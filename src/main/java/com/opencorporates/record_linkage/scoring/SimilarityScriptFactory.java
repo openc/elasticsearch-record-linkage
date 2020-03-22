@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.index.LeafReader;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.util.BytesRefBuilder;
 import org.elasticsearch.index.analysis.IndexAnalyzers;
@@ -84,7 +85,7 @@ public class SimilarityScriptFactory {
     protected List<String> parseWithAnalyzer(String text) {
     	List<String> results = new ArrayList<>();
 
-    	try (TokenStream source = analyzer.tokenStream(field, query)) {
+    	try (TokenStream source = analyzer.tokenStream(field, text)) {
             source.reset();
             CharTermAttribute termAtt = source.addAttribute(CharTermAttribute.class);
             BytesRefBuilder builder = new BytesRefBuilder();
@@ -99,9 +100,10 @@ public class SimilarityScriptFactory {
     }
     
     public SimilarityScript similarityScript(LeafReaderContext context) throws IOException {
-    	int totalDocs = context.reader().getDocCount(field);
+    	LeafReader reader = context.reader();
+        int totalDocs = reader.getDocCount(field);
     	
-    	return new SimilarityScript(context, field, query, queryTokens, positionIncrementGap, totalDocs, similarity);
+    	return new SimilarityScript(reader, field, query, queryTokens, positionIncrementGap, totalDocs, similarity);
     }
     
     public ScoreScript.LeafFactory toScoreScriptFactory() {
