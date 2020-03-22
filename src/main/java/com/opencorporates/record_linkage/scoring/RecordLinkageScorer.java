@@ -31,9 +31,21 @@ public class RecordLinkageScorer implements ScriptEngine {
 	public static Map<String, StringSimilarity> registeredSimilarities = new HashMap<>();
 	
     static {
-    	registeredSimilarities.put("tfidf", new TFIDFSimilarity());
-    	registeredSimilarities.put("levenshtein", new LevenshteinSimilarity());
-    	registeredSimilarities.put("exact_tfidf", new ExactTFIDFSimilarity());
+    	registerSimilarity("tfidf", new TFIDFSimilarity());
+    	registerSimilarity("levenshtein", new LevenshteinSimilarity());
+    	registerSimilarity("exact_tfidf", new ExactTFIDFSimilarity());
+    }
+    
+    /**
+     * Registers a similarity for use in ElasticSearch queries.
+     * 
+     * @param identifier
+     *     the name of the similarity method, which will be used as "source" in queries
+     * @param similarity
+     *     the instance implementing this similarity
+     */
+    static void registerSimilarity(String identifier, StringSimilarity similarity) {
+        registeredSimilarities.put(identifier, similarity);
     }
 
 	@Override

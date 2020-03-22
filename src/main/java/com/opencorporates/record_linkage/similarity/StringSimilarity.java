@@ -3,6 +3,23 @@ package com.opencorporates.record_linkage.similarity;
 import java.util.List;
 import java.util.Map;
 
+import com.opencorporates.record_linkage.scoring.RecordLinkageScorer;
+
+/**
+ * A metric computing the similarity between a query string and a field value
+ * in an ElasticSearch document. The metric has access to tokenized versions
+ * of the two strings to compare, as well as frequency information for these tokens
+ * (how often they appear in the entire collection).
+ * 
+ * Instances of this interface are expected to be immutable, and can be configured
+ * using {@link StringSimilarity#withParameters(Map)}, which returns a configured
+ * copy of the string similarity.
+ * 
+ * Instances of this interfaces should be registered in {@link RecordLinkageScorer#registerSimilarity}.
+ * 
+ * @author Antonin Delpeuch
+ *
+ */
 public interface StringSimilarity {
 	/**
 	 * Compute the similarity between a query and a document, given by the frequencies

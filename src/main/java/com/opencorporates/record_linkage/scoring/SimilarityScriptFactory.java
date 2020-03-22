@@ -39,6 +39,7 @@ public class SimilarityScriptFactory {
 
 	/**
 	 * Constructs a factory.
+	 * 
 	 * @param params
 	 *     the similarity parameters supplied by the user in the query
 	 * @param lookup
@@ -77,6 +78,7 @@ public class SimilarityScriptFactory {
     
     /**
      * Parses a string with the analyzer supplied to the script.
+     * 
      * @param text
      *         the text to parse into tokens
      * @return
@@ -99,6 +101,15 @@ public class SimilarityScriptFactory {
 		return results;
     }
     
+    /**
+     * Instantiates the similarity script in a given context.
+     * 
+     * @param context
+     *     which gives access to the index on a particular node
+     * @return
+     *     the similarity script ready to compute similarity values
+     * @throws IOException
+     */
     public SimilarityScript similarityScript(LeafReaderContext context) throws IOException {
     	LeafReader reader = context.reader();
         int totalDocs = reader.getDocCount(field);
@@ -106,6 +117,10 @@ public class SimilarityScriptFactory {
     	return new SimilarityScript(reader, field, query, queryTokens, positionIncrementGap, totalDocs, similarity);
     }
     
+    /**
+     * @return
+     *      a script used to influence the score of documents returned in a search query
+     */
     public ScoreScript.LeafFactory toScoreScriptFactory() {
     	return new ScoreScript.LeafFactory() {
 			@Override
@@ -135,6 +150,11 @@ public class SimilarityScriptFactory {
 
     }
 
+    /**
+     * @return
+     *     a script used to return the computed score as an additional field in a
+     *     collection of documents.
+     */
 	public LeafFactory toFieldScriptFactory() {
 		return new FieldScript.LeafFactory() {
 

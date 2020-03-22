@@ -11,7 +11,9 @@ import org.elasticsearch.script.ScriptEngine;
 import com.opencorporates.record_linkage.scoring.RecordLinkageScorer;
 
 /**
- * Registers record-linkage related scoring methods.
+ * A plugin which adds scoring metrics useful for record linkage
+ * scenarios. These scoring metrics can either be used to refine 
+ * the scores of search results or be included as an additional field.
  */
 public class RecordLinkagePlugin extends Plugin implements ScriptPlugin {
 	
