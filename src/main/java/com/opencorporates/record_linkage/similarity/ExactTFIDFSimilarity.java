@@ -10,6 +10,23 @@ import java.util.Map;
  */
 public class ExactTFIDFSimilarity implements StringSimilarity {
 
+	/**
+	 * Compute the similarity between a query and a document, given by the frequencies
+	 * of all tokens appearing in that field.
+	 * @param query
+	 *     the original query string supplied by the user
+	 * @param queryTokens
+	 *     the query parsed into an ordered list of tokens
+	 * @param queryFreqs
+	 *     the frequency (number of documents appeared in) of each token in the query
+	 * @param fieldTokens
+	 *     the field value parsed into an ordered list of tokens
+	 * @param fieldFreqs
+	 *     the frequency (number of documents appeared in) of each token in the matched field.
+	 * @param numDocs
+	 *     the number of documents in which the field is present
+	 * @return a non-negative score
+	 */
 	@Override
 	public double compute(String query, List<String> queryTokens, Map<String, Long> queryFreqs,
 			List<String> fieldTokens, Map<String, Long> fieldFreqs, int numDocs) {

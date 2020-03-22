@@ -123,7 +123,7 @@ public class SimilarityScriptFactory {
 					}
 
 					@Override
-					public double execute() {
+					public double execute(ExplanationHolder explanation) {
 						return wrapped.execute();
 					}
 					
