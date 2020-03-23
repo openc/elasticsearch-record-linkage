@@ -38,7 +38,7 @@ First, you need to index your documents in ElasticSearch, using an index profile
 which enables term vectors on the fields that you want to use the similarities on.
 For instance, the following index profile enables term vectors for the `name` and `address`
 field, and defines a custom analyzer for the field `name`:
-```
+```json
 {
     "settings": {
         "number_of_shards": 3,
@@ -81,7 +81,7 @@ The ElasticSearch manual has [some background about scripting in queries](https:
 In this language, the source code of a script consists only of an identifier
 for a scoring function, as follows:
 
-```
+```json
 {
     "script": {
         "lang": "record_linkage_scorer",
@@ -106,7 +106,7 @@ Such a script can be used either in a scoring context or as a scripted field (to
 
 For instance, you can retrieve similarity scores, without influencing how search results are retrieved and ordered:
 
-```
+```json
 {
   "query": {
     "term": {
@@ -146,7 +146,7 @@ This will add two extra fields to each search result, returning the value of the
 You can also use the similarity metrics to rescore the results. Since the computation of these similarity metrics is
 more costly than ElasticSearch's default scoring, we recommend that you only rescore the n best results.
 
-```
+```json
 {
   "query": {
     "term": {
