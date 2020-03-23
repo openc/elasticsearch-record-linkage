@@ -25,6 +25,8 @@ This creates a zip archive at
 Installing the plugin
 ---------------------
 
+The plugin is known to work with ElasticSearch 7.5.
+
 Assuming the plugin has been downloaded at `/tmp/elasticsearch-record-linkage-0.0.1-SNAPSHOT.zip`, 
 it can be installed in ElasticSearch with
 `bin/elasticsearch-plugin install file:///tmp/elasticsearch-record-linkage-0.0.1-SNAPSHOT.zip`
