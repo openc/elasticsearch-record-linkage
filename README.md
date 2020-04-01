@@ -1,5 +1,6 @@
 ElasticSearch record linkage plugin
 ===================================
+[![Build Status](https://travis-ci.org/openc/elasticsearch-record-linkage.svg?branch=master)](https://travis-ci.org/openc/elasticsearch-record-linkage)
 
 This is a small ElasticSearch plugin which exposes scoring methods
 useful for record linkage. This makes it possible to perform record
