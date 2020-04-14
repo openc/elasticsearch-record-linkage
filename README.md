@@ -26,7 +26,8 @@ This creates a zip archive at
 Installing the plugin
 ---------------------
 
-The plugin is known to work with ElasticSearch 7.5.
+The plugin is available for ElasticSearch 7.4, 7.5 and 7.6 and can be downloaded
+from the [releases page](https://github.com/openc/elasticsearch-record-linkage/releases).
 
 Assuming the plugin has been downloaded at `/tmp/elasticsearch-record-linkage-0.0.1-SNAPSHOT.zip`, 
 it can be installed in ElasticSearch with
