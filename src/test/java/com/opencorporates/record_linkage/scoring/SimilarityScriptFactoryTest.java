@@ -14,7 +14,6 @@ import org.elasticsearch.index.analysis.NamedAnalyzer;
 import org.elasticsearch.index.mapper.MapperService;
 import org.elasticsearch.script.FieldScript;
 import org.elasticsearch.script.ScoreScript;
-import org.elasticsearch.script.ScoreScript.ExplanationHolder;
 import org.elasticsearch.search.lookup.DocLookup;
 import org.elasticsearch.search.lookup.LeafSearchLookup;
 import org.elasticsearch.search.lookup.SearchLookup;
@@ -78,9 +77,8 @@ public class SimilarityScriptFactoryTest {
         Assert.assertFalse(leafFactory.needs_score());
         ScoreScript scoreScript = leafFactory.newInstance(LeafReaderContextStub.create(reader));
         scoreScript.setDocument(4);
-        ExplanationHolder explanation = Mockito.mock(ExplanationHolder.class);
         
-        Assert.assertEquals(scoreScript.execute(explanation), 0.5, 0.01);
+        Assert.assertEquals(scoreScript.execute(), 0.5, 0.01);
     }
     
     @Test
