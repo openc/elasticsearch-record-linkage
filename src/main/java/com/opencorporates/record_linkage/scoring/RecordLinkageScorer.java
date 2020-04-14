@@ -1,7 +1,10 @@
 package com.opencorporates.record_linkage.scoring;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.elasticsearch.script.FieldScript;
 import org.elasticsearch.script.ScoreScript;
@@ -26,6 +29,9 @@ import com.opencorporates.record_linkage.similarity.TFIDFSimilarity;
  * @author Antonin Delpeuch
  */
 public class RecordLinkageScorer implements ScriptEngine {
+    
+    // contexts supported by this scorer
+    private static Set<ScriptContext<?>> supportedContexts = Arrays.asList(FieldScript.CONTEXT, ScoreScript.CONTEXT).stream().collect(Collectors.toSet());
 	
 	// map of all known similarities. The key is the string input by the user to select it.
 	public static Map<String, StringSimilarity> registeredSimilarities = new HashMap<>();
@@ -91,5 +97,10 @@ public class RecordLinkageScorer implements ScriptEngine {
                     + context.name + "]");
         }
 	}
+
+    @Override
+    public Set<ScriptContext<?>> getSupportedContexts() {
+        return supportedContexts;
+    }
 
 }
