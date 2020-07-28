@@ -33,6 +33,11 @@ Assuming the plugin has been downloaded at `/tmp/elasticsearch-record-linkage-0.
 it can be installed in ElasticSearch with
 `bin/elasticsearch-plugin install file:///tmp/elasticsearch-record-linkage-0.0.1-SNAPSHOT.zip`
 
+**Notes for building and linking locally with ES-7.7.1:**
+Make sure to run command using elasticsearch-7.7.1 e.g:
+- `/path_to/elasticsearch-7.7.1/bin/elasticsearch-plugin install file:///path_to/elasticsearch-record-linkage/target/releases/elasticsearch-record-linkage-${version}.zip`
+And have command pointing to the file created by the output of `mvn package` here: `target/releases/elasticsearch-record-linkage-${version}.zip`
+
 It can be uninstalled with `bin/elasticsearch-plugin remove recordLinkage`.
 
 Using the plugin
